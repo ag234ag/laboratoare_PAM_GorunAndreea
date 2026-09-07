@@ -176,12 +176,8 @@ class _CurrencyConverterScreenState extends State<CurrencyConverterScreen> {
                   ),
                   const SizedBox(height: 20),
                   const Text(
-                    'Cursuri fixe · Doar pentru demonstrație',
+                    'Cursuri valutare',
                     style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  const SizedBox(height: 8),
-                  const Text(
-                    'Aceste cursuri sunt demonstrative și nu sunt actualizate în timp real.',
                   ),
                   const SizedBox(height: 12),
                   Wrap(
