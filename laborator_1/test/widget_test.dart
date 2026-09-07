@@ -19,7 +19,7 @@ void main() {
     expect(find.byType(TextField), findsOneWidget);
     expect(find.byType(DropdownButton<Currency>), findsNWidgets(2));
     expect(
-      find.text('Cursuri fixe · Doar pentru demonstrație'),
+      find.text('Cursuri valutare'),
       findsOneWidget,
     );
     await tester.enterText(find.byType(TextField), '100,50');
