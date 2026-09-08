@@ -5,11 +5,11 @@ enum Currency {
   ron('RON', 'Leu românesc', 3.90),
   gbp('GBP', 'Liră sterlină', 22.70);
 
+//constructor 
   const Currency(this.code, this.label, this.rateInMdl);
 
   final String code;
   final String label;
 
-  /// Valoarea în MDL a unei unități. Curs fix, exclusiv demonstrativ.
   final double rateInMdl;
 }
