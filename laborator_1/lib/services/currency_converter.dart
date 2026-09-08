@@ -28,7 +28,6 @@ class CurrencyConverter {
       );
     }
     final result = amount * source.rateInMdl / destination.rateInMdl;
-    // Păstrăm afișarea cu exact două zecimale, fără notație exponențială.
     if (!result.isFinite || result >= 1e21) {
       throw const FormatException(
         'Suma este prea mare. Introduceți o sumă mai mică.',

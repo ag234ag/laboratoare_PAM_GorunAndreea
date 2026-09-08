@@ -13,7 +13,7 @@ class CurrencyConverterApp extends StatelessWidget {
     title: 'Conversie monedă',
     theme: ThemeData(
       useMaterial3: true,
-      colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF006B60)),
+      colorScheme: ColorScheme.fromSeed(seedColor: const Color.fromARGB(255, 1, 43, 250)),
       inputDecorationTheme: const InputDecorationTheme(
         border: OutlineInputBorder(),
       ),

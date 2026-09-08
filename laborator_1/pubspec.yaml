@@ -1,19 +1,44 @@
-﻿name: laborator_1
+﻿# Numele proiectului.
+name: laborator_1
+
+# Descrierea aplicației.
 description: "Conversie monedă: convertor Android cu rate fixe demonstrative."
+
+# Nu publică proiectul pe pub.dev.
 publish_to: 'none'
+
+# Versiunea aplicației și numărul buildului.
 version: 1.0.0+1
 
+# Configurează mediul Dart.
 environment:
+
+  # Versiunea necesară a Dart SDK.
   sdk: ^3.13.2
 
+# Pachetele necesare aplicației.
 dependencies:
+
+  # Framework-ul Flutter.
   flutter:
+
+    # Folosește Flutter SDK instalat.
     sdk: flutter
 
+# Pachetele folosite la dezvoltare.
 dev_dependencies:
+
+  # Instrumente pentru testarea aplicației.
   flutter_test:
+
+    # Folosește instrumentele Flutter SDK.
     sdk: flutter
+
+  # Reguli pentru verificarea codului.
   flutter_lints: ^6.0.0
 
+# Configurările specifice Flutter.
 flutter:
+
+  # Activează pictogramele Material Design.
   uses-material-design: true
