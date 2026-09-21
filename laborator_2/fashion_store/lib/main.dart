@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'product_details_page.dart';
 
 void main() {
   runApp(const GemStoreApp());
@@ -36,7 +37,6 @@ class HomePage extends StatelessWidget {
             height: 1800 * scale,
             child: Stack(
         children: [
-          // Antetul: meniu, GemStore și notificare
         Positioned(
         top: 63 * scale,
         left: 32 * scale,
@@ -90,7 +90,6 @@ class HomePage extends StatelessWidget {
         ),
         ),
 
-          // Blocul cu cele patru categorii
           Positioned(
             top: 125 * scale,
             left: 35 * scale,
@@ -472,13 +471,12 @@ class ProductsList extends StatelessWidget {
           ),
           SizedBox(width: 20),
 
-          // Ultimul produs: imagine4 este fundalul,
-          // iar imagine5 se pune peste ea.
           ProductCard(
             imagePath: 'vectors/imagine4.png',
             overlayImagePath: 'vectors/imagine5.png',
             title: 'Sportswear',
             price: '\$ 80.00',
+            openDetails: true,
           ),
         ],
       ),
@@ -491,6 +489,7 @@ class ProductCard extends StatelessWidget {
   final String? overlayImagePath;
   final String title;
   final String price;
+  final bool openDetails;
 
   const ProductCard({
     super.key,
@@ -498,79 +497,90 @@ class ProductCard extends StatelessWidget {
     this.overlayImagePath,
     required this.title,
     required this.price,
+    this.openDetails = false,
   });
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: 126,
-      height: 227,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(12),
-            child: SizedBox(
-              width: 126,
-              height: 172,
-              child: Stack(
-                fit: StackFit.expand,
-                children: [
-                  Image.asset(
-                    imagePath,
-                    width: 126,
-                    height: 172,
-                    fit: BoxFit.cover,
-                  ),
-                  if (overlayImagePath != null)
-                    Positioned(
-                      left: 16,
-                      bottom: 0,
-                      width: 110,
-                      height: 172,
-                      child: Image.asset(
-                        overlayImagePath!,
-                        fit: BoxFit.contain,
-                        alignment: Alignment.bottomCenter,
-                        filterQuality: FilterQuality.high,
-                      ),
+    return GestureDetector(
+      behavior: HitTestBehavior.opaque,
+      onTap: openDetails
+          ? () {
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (_) => const ProductDetailsPage(),
+          ),
+        );
+      }
+          : null,
+      child: SizedBox(
+        width: 126,
+        height: 227,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(12),
+              child: SizedBox(
+                width: 126,
+                height: 172,
+                child: Stack(
+                  fit: StackFit.expand,
+                  children: [
+                    Image.asset(
+                      imagePath,
+                      fit: BoxFit.cover,
                     ),
-                ],
+                    if (overlayImagePath != null)
+                      Positioned(
+                        left: 16,
+                        bottom: 0,
+                        width: 110,
+                        height: 172,
+                        child: Image.asset(
+                          overlayImagePath!,
+                          fit: BoxFit.contain,
+                          alignment: Alignment.bottomCenter,
+                          filterQuality: FilterQuality.high,
+                        ),
+                      ),
+                  ],
+                ),
               ),
             ),
-          ),
-          const SizedBox(height: 10),
-          SizedBox(
-            height: 20,
-            child: Text(
-              title,
-              maxLines: 1,
-              overflow: TextOverflow.clip,
-              style: const TextStyle(
-                fontFamily: 'ProductSans',
-                fontSize: 12,
-                fontWeight: FontWeight.w500,
-                height: 1,
-                letterSpacing: -0.12,
-                color: Color(0xFF1D1F22),
+            const SizedBox(height: 10),
+            SizedBox(
+              height: 20,
+              child: Text(
+                title,
+                maxLines: 1,
+                overflow: TextOverflow.clip,
+                style: const TextStyle(
+                  fontFamily: 'ProductSans',
+                  fontSize: 12,
+                  fontWeight: FontWeight.w500,
+                  height: 1,
+                  letterSpacing: -0.12,
+                  color: Color(0xFF1D1F22),
+                ),
               ),
             ),
-          ),
-          const SizedBox(height: 5),
-          SizedBox(
-            height: 19,
-            child: Text(
-              price,
-              style: const TextStyle(
-                fontFamily: 'ProductSans',
-                fontSize: 16,
-                fontWeight: FontWeight.w700,
-                height: 19 / 16,
-                color: Color(0xFF1D1F22),
+            const SizedBox(height: 5),
+            SizedBox(
+              height: 19,
+              child: Text(
+                price,
+                style: const TextStyle(
+                  fontFamily: 'ProductSans',
+                  fontSize: 16,
+                  fontWeight: FontWeight.w700,
+                  height: 19 / 16,
+                  color: Color(0xFF1D1F22),
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -586,7 +596,6 @@ class NewCollectionBanner extends StatelessWidget {
       child: ClipRect(
         child: Stack(
           children: [
-            // Fundalul bannerului
             Image.asset(
               'vectors/banner1.png',
               width: 375,
@@ -594,7 +603,6 @@ class NewCollectionBanner extends StatelessWidget {
               fit: BoxFit.cover,
             ),
 
-            // Cercul mare, din spate
             Positioned(
               left: 251,
               top: 6,
@@ -607,8 +615,6 @@ class NewCollectionBanner extends StatelessWidget {
                 ),
               ),
             ),
-
-            // Cercul mic, peste cercul mare
             Positioned(
               left: 266,
               top: 21,
@@ -618,8 +624,6 @@ class NewCollectionBanner extends StatelessWidget {
                 height: 102,
               ),
             ),
-
-            // imagine – peste ambele cercuri
             Positioned(
               left: 257,
               bottom: 0,
@@ -631,7 +635,6 @@ class NewCollectionBanner extends StatelessWidget {
               ),
             ),
 
-            // Textele din stânga
             Positioned(
               left: 79,
               top: 36,
@@ -792,7 +795,6 @@ class RecommendedProductCard extends StatelessWidget {
       child: Stack(
         clipBehavior: Clip.none,
         children: [
-          // Dreptunghiul alb din spate
           Positioned(
             left: 10,
             top: 0,
@@ -817,8 +819,6 @@ class RecommendedProductCard extends StatelessWidget {
               ),
             ),
           ),
-
-          // Imaginea – rămâne puțin în afara dreptunghiului
           ClipRRect(
             borderRadius: BorderRadius.circular(8),
             child: SizedBox(
@@ -930,15 +930,12 @@ class SlimBeautyBanner extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
         child: Stack(
           children: [
-            // Fundal
             Image.asset(
               'vectors/banner2.png',
               width: 312,
               height: 141,
               fit: BoxFit.cover,
             ),
-
-            // Cercul din spatele femeii
             Positioned(
               left: 194,
               top: 25,
@@ -959,8 +956,6 @@ class SlimBeautyBanner extends StatelessWidget {
                 fit: BoxFit.cover,
               ),
             ),
-
-            // Textul mic
             Positioned(
               left: 20,
               top: 23,
@@ -985,8 +980,6 @@ class SlimBeautyBanner extends StatelessWidget {
                 ],
               ),
             ),
-
-            // Textul principal
             const Positioned(
               left: 20,
               top: 63,
@@ -1020,15 +1013,12 @@ class FabulousDesignBanner extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
         child: Stack(
           children: [
-            // Fundalul
             Image.asset(
               'vectors/banner3.png',
               width: 312,
               height: 229,
               fit: BoxFit.cover,
             ),
-
-            // Cercul din spatele femeii
             Positioned(
               left: 165,
               top: 41,
@@ -1038,8 +1028,6 @@ class FabulousDesignBanner extends StatelessWidget {
                 height: 114,
               ),
             ),
-
-            // Femeia
             Positioned(
               left: 160,
               top: 0,
@@ -1050,8 +1038,6 @@ class FabulousDesignBanner extends StatelessWidget {
                 fit: BoxFit.cover,
               ),
             ),
-
-            // Linia decorativă
             Positioned(
               left: 23,
               top: 34,
@@ -1061,8 +1047,6 @@ class FabulousDesignBanner extends StatelessWidget {
                 color: const Color(0xFF777E90),
               ),
             ),
-
-            // Textul mic
             const Positioned(
               left: 32,
               top: 35,
@@ -1079,8 +1063,6 @@ class FabulousDesignBanner extends StatelessWidget {
                 ),
               ),
             ),
-
-            // Textul principal
             const Positioned(
               left: 24,
               top: 74,
@@ -1156,3 +1138,4 @@ class ElegantDesignCard extends StatelessWidget {
     );
   }
 }
+
